@@ -83,8 +83,17 @@ class Elements(BaseClass):
              total = total + int(val.text)
         assert total == 296
 
+        #mousehover
+        self. driver.execute_script("window.scrollTo(0, 1000);")
+        acobj = action_chains.ActionChains(self.driver)
+        btn = self.driver.find_element(By.ID, "mousehover")
+        acobj.move_to_element(btn).perform()
+        acobj.click(self.driver.find_element(By.LINK_TEXT, "Top")).perform()
+        self. driver.execute_script("window.scrollTo(0, 1000);")
 
-
-
-
-
+        #iframe
+        frame = self.driver.find_element(By.ID, "courses-iframe")
+        self.driver.switch_to.frame(frame)
+        print(self.driver.find_element(By.TAG_NAME, "h2").text)
+        self.driver.switch_to.default_content()
+        print("This is to confirm that we have switched to default page," + self.driver.find_element(By.TAG_NAME, "h1").text)
